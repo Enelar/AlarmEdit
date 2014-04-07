@@ -6,6 +6,8 @@ class db
   {
     $res = mssql_query($stmt);
 
+    if ($res === true)
+      return null;
     if (!mssql_num_rows($res))
       $ret = null;
     else

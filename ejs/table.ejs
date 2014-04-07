@@ -1,56 +1,29 @@
-<table class='table table-striped'>
-<tr>
-  <th>-</th>
+<div class='row'>
+  <div class='col-md-3'>-</div>
 <% for (var k in types)
 {
   var v = types[k];
 %>
-  <th style='min-width: 50px;'>
+  <div class='col-md-1' style='min-width: 50px;'>
   <%= v.name %>
-  </th>
+  </div>
 <%  
 }
 %>
-</tr>
+</div>
 
 <% for (var k in tags)
 {
   var v = tags[k];
+  v.types = types;
+  
+  if (v.name == 'A_AVU-3')
+    break;
 %>
-  <tr>
-  <td>
-    <div data-type='tag_name' title='<%= v.description %>'>
-      <%= v.name %>
-    </div>
-  </td>
-  <% for (var k1 in types)
-  {
-    var ty = types[k1];
-    //console.log(ty, v.values);
-    if (typeof(v.values[ty.name]) != 'undefined')
-      v1 = v.values[ty.name];
-    else
-      v1 = {priority: null};
-  %>
-    <td>
-<%
-    if (v1.priority != null)
-    {
-%>
-    <%= phoxy.DeferRender('input', v1) %>
-<%
-    }
-%>
-    </td>
-  <%  
-  }
-  %>  
-  </tr>
+  <%= phoxy.DeferRender('tag', v) %>
 <%  
 }
 %>
-
-</table>
 
 <%
 phoxy.Defer(function()

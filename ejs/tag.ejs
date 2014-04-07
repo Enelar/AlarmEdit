@@ -1,0 +1,70 @@
+<div class='row'>
+  <div class='col-md-3'>
+    <div data-type='tag_name' title='<%= description %>'>
+      <%= name %>
+    </div>
+  </div>
+<% for (var k in types)
+{
+  var ty = types[k];
+  //console.log(ty, values);
+  if (typeof(values[ty.name]) != 'undefined')
+    v = values[ty.name];
+  else
+    v = {priority: null, id: ''};
+%>
+  <div class='col-md-1'>
+<%
+  if (v.priority != null)
+  {
+    var did = phoxy.GenerateUniqueID();
+    var input = 
+      $('<input />')
+        .addClass('form-control')
+        .attr('id', did)
+        .attr('data-db-id', v.id)
+        .attr('value', v.priority);
+
+        phoxy.Appeared('#' + did, function()
+        {
+          $(this)
+            .change(function()
+            {
+              var that = $(this);
+              that
+                .prop('disabled', true);
+              var db_id = $(this).attr('data-db-id');
+              console.log('a');
+              phoxy.AJAX(
+                'alarm_prio/Update?id=' +
+                db_id +
+                '&val=' +
+                that.val(), function(data)
+                {
+                  that.prop('disabled', false);
+                  if (data.data.res)
+                  {
+                    that.tooltip({'title' : 'Сохранено'}).tooltip('show');
+                    phoxy.Defer(function() { that.tooltip('destroy'); }, 500);
+                  }
+                  else
+                  {
+                    that.tooltip({'title' : 'НЕ Сохранено'}).tooltip('show');
+                    that.css({'background-color' : 'red'});
+                    phoxy.Defer(function() { that.tooltip('destroy'); }, 1000);
+                    phoxy.Defer(function() { that.css({'background-color' : 'white'}); }, 2000);
+                  }
+                });
+            });
+        });
+
+%>
+    <%= input.wrap('<div></div>').parent().html() %>
+<%
+  }
+%>
+  </div>
+<%  
+}
+%>  
+</div>
