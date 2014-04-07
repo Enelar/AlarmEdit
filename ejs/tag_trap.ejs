@@ -1,0 +1,22 @@
+
+<div class='row' id='<%= did = phoxy.GenerateUniqueID() %>' style='height: 35px; background-color: #ddd;'>
+  <div class='col-md-12'>
+      <%= v.name %>
+  </div>
+</div>
+
+<%
+window[did] = v;
+phoxy.Appeared('#' + did, function()
+{
+  $(this).hover(function()
+  {
+    var that = this;
+    phoxy.Fancy('tag', window[$(this).attr('id')], function(html)
+    {
+      $(that).replaceWith(html);
+    });
+  });
+})
+
+%>

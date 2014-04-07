@@ -1,5 +1,5 @@
 <div class='row'>
-  <div class='col-md-3'>-</div>
+  <div class='col-md-2'>-</div>
 <% for (var k in types)
 {
   var v = types[k];
@@ -17,10 +17,24 @@
   var v = tags[k];
   v.types = types;
   
-  if (v.name == 'A_AVU-3')
-    break;
+  //if (v.name == 'A_AVU-3')
+  //break;
+  var cb = undefined;
+  if (k == tags.length - 1)
+    cb = function()
+    {
+      $('#content .row')
+        .each(function(index)
+        {
+          var that = this;
+          phoxy.Defer(function()
+          {
+            $(that).trigger('mouseenter')
+          }, 7 * index);
+        });
+    };
 %>
-  <%= phoxy.DeferRender('tag', v) %>
+  <%= phoxy.DeferRender('tag_trap', {v: v}, cb) %>
 <%  
 }
 %>
@@ -32,5 +46,6 @@ phoxy.Defer(function()
   {
     $(this).tooltip();
   });
+  
 });
 %>

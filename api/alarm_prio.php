@@ -14,6 +14,30 @@ class alarm_prio extends api
       ]
     ];
   }
+  
+  protected function D( $letter )
+  {
+    $res = db::Query("
+      SELECT id, CAST(name as text) as name, CAST(description as text) as description 
+      FROM [dbo].[TAG] 
+      WHERE (SUBSTRING(name, 1, 1) = '$letter')
+      ORDER BY TAG.name ASC");
+
+    $ret = [];
+    if (count($res))
+      foreach ($res as $row)
+      {
+        $row['values'] = $this->TagValues($row['id']);
+        array_push($ret, $row);
+      }
+    return ["data" => $ret];
+  }
+  
+  protected function Dirs()
+  {
+    $ret = db::Query("SELECT SUBSTRING(name, 1, 1) FROM [dbo].[TAG] GROUP BY SUBSTRING(name, 1, 1) ORDER BY SUBSTRING(name, 1, 1)");
+    
+  }
 
   protected function Tags()
   {
