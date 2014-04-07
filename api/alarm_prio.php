@@ -17,18 +17,28 @@ class alarm_prio extends api
 
   protected function Tags()
   {
-    $ret = db::Query("SELECT id, CAST(name as text) as name, CAST(description as text) as description FROM [dbo].[TAG] ORDER BY TAG.name ASC");
+    $res = db::Query("SELECT id, CAST(name as text) as name, CAST(description as text) as description FROM [dbo].[TAG] ORDER BY TAG.name ASC");
+    $ret = [];
+    foreach ($res as $row)
+    {
+      $row['values'] = $this->TagValues($row['id']);
+      array_push($ret, $row);
+    }
     return ["data" => $ret];
   }
-  
-  protected function TagValues( $id )
+
+  public function TagValues( $id )
   {
-    $res = mssql_query("SELECT type, priority FROM [dbo].[ALARM] WHERE id_tag=$id");
+    $res = db::Query("SELECT id, type, priority FROM [dbo].[ALARM] WHERE id_tag=$id");
+    $ret = [];
+    foreach ($res as $row)
+      $ret[$row['type']] = $row;
+    return $ret;
   }
   
   protected function Types()
   {
-    $ret = db::Query("SELECT type FROM [dbo].[ALARM] GROUP BY type");
+    $ret = db::Query("SELECT type as name FROM [dbo].[ALARM] GROUP BY type");
     return ["data" => $ret];
   }
   

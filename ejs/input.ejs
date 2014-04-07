@@ -1,9 +1,9 @@
 <%
 did = phoxy.GenerateUniqueID();
 
-if (prio == null)
+if (priority == null)
 {
-  ID = '';
+  id = '';
   phoxy.Appeared('#' + did, function()
   {
     $(this).prop('disabled', 'true');
@@ -11,7 +11,6 @@ if (prio == null)
 }
 phoxy.Appeared('#' + did, function()
 {
-  console.log(did);
   $(this)
     .change(function()
     {
@@ -46,8 +45,8 @@ phoxy.Appeared('#' + did, function()
 
 <input
   id='<%= did %>'
-  data-db-id='<%= ID %>'
+  data-db-id='<%= id %>'
   type='text'
-  value='<%= prio %>'
+  value='<%= priority %>'
   class="form-control"
   >

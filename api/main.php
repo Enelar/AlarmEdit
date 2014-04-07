@@ -11,6 +11,6 @@ class main extends api
   
   protected function Home()
   {
-    return LoadModule('api', 'alarm_prio', true)->Reserve();
+    //return LoadModule('api', 'alarm_prio', true)->Reserve();
   }
 }

@@ -25,10 +25,22 @@
   </td>
   <% for (var k1 in types)
   {
-    var v1 = types[k1];
+    var ty = types[k1];
+    //console.log(ty, v.values);
+    if (typeof(v.values[ty.name]) != 'undefined')
+      v1 = v.values[ty.name];
+    else
+      v1 = {priority: null};
   %>
     <td>
-    <%= phoxy.DeferRender('input', 'alarm_prio/Value?tag=' + v.name + '&type=' + v1.name) %>
+<%
+    if (v1.priority != null)
+    {
+%>
+    <%= phoxy.DeferRender('input', v1) %>
+<%
+    }
+%>
     </td>
   <%  
   }
