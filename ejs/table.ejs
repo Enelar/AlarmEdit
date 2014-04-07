@@ -1,5 +1,8 @@
+<div class='prio_table'>
 <div class='row'>
-  <div class='col-md-2'>-</div>
+  <div class='col-md-4'></div>
+  <div class='col-md-8'>
+    <div class='row'>
 <% for (var k in types)
 {
   var v = types[k];
@@ -10,7 +13,10 @@
 <%  
 }
 %>
+    </div>
+  </div>
 </div>
+  
 
 <% for (var k in tags)
 {
@@ -49,3 +55,4 @@ phoxy.Defer(function()
   
 });
 %>
+</div>
