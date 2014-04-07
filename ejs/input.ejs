@@ -1,0 +1,41 @@
+<%
+did = phoxy.GenerateUniqueID();
+
+if (prio == null)
+{
+  id = '';
+  phoxy.Appeared('#' + did, function()
+  {
+    $(this).prop('disabled', 'true');
+  });
+}
+phoxy.Appeared('#' + did, function()
+{
+  console.log(did);
+  $(this)
+    .change(function()
+    {
+      var that = $(this);
+      that
+        .prop('disabled', true);
+      var db_id = $(this).attr('data-db-id');
+      console.log('a');
+      phoxy.AJAX(
+        'main/Update?id=' +
+        db_id +
+        '&val=' +
+        that.val(), function()
+        {
+          that.prop('disabled', false);
+        });
+    });
+});
+%>
+
+<input
+  id='<%= did %>'
+  data-db-id='<%= id %>'
+  type='text'
+  value='<%= prio %>'
+  class="form-control"
+  >

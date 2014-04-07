@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+#Deny From All
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^api/(.*)$ rpc.php?api=$1 [L,QSA]
+RewriteRule ^libs/(.*)$ phoxy/libs/$1 [L,QSA]
+RewriteRule ^phoxy_loader.js$ phoxy/phoxy_loader.js [L,QSA]
+RewriteRule ^phoxy.js$ phoxy/phoxy.js [L,QSA]
+
+</IfModule>
