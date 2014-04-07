@@ -38,7 +38,7 @@ class alarm_prio extends api
         array_push($ret, ["name" => $row[0]]);
       }
     } while (mssql_next_result($res));
-    
+
     return ["data" => $ret];
   }
   
