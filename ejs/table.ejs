@@ -3,38 +3,38 @@
   <th>-</th>
 <% for (var k in types)
 {
-	var v = types[k];
+  var v = types[k];
 %>
   <th style='min-width: 50px;'>
-	<%= v.name %>
+  <%= v.name %>
   </th>
-<%	
+<%  
 }
 %>
 </tr>
 
 <% for (var k in tags)
 {
-	var v = tags[k];
+  var v = tags[k];
 %>
   <tr>
-	<td>
-		<div data-type='tag_name' title='<%= v.description %>'>
-			<%= v.name %>
-		</div>
-	</td>
-	<% for (var k1 in types)
-	{
-		var v1 = types[k1];
-	%>
-	  <td>
-		<%= phoxy.DeferRender('input', 'alarm_prio/Value?tag=' + v.name + '&type=' + v1.name) %>
-	  </td>
-	<%	
-	}
-	%>	
+  <td>
+    <div data-type='tag_name' title='<%= v.description %>'>
+      <%= v.name %>
+    </div>
+  </td>
+  <% for (var k1 in types)
+  {
+    var v1 = types[k1];
+  %>
+    <td>
+    <%= phoxy.DeferRender('input', 'alarm_prio/Value?tag=' + v.name + '&type=' + v1.name) %>
+    </td>
+  <%  
+  }
+  %>  
   </tr>
-<%	
+<%  
 }
 %>
 
@@ -43,9 +43,9 @@
 <%
 phoxy.Defer(function()
 {
-	$('table tr td div[data-type="tag_name"]').each(function()
-	{
-		$(this).tooltip();
-	});
+  $('table tr td div[data-type="tag_name"]').each(function()
+  {
+    $(this).tooltip();
+  });
 });
 %>

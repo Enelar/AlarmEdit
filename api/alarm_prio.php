@@ -44,9 +44,9 @@ class alarm_prio extends api
   
   protected function Value( $tag, $type )
   { // yep i know what is sqlinj
-    $res = mssql_query("SELECT * FROM [dbo].[ALARM] WHERE id_tag=$tag AND type='$type'");
+    $res = mssql_query("SELECT * FROM [dbo].[ALARM] WHERE id_tag=(SELECT id FROM [dbo].[TAG] WHERE name='$tag') AND type='$type'");
     if (mssql_num_rows($res))
-      $ret = mssql_fetch_row($res);
+      $ret = mssql_fetch_assoc($res);
     else
       $ret = ["id" => null, "PRIORITY" => null];
     $ret['prio'] = $ret["PRIORITY"];
@@ -57,8 +57,8 @@ class alarm_prio extends api
   }
   
   protected function Update( $id, $val )
-  {
-    
+  { // yep i know what is sqlinj
+    $res = mssql_query("UPDATE [dbo].[ALARM] SET priority=$val WHERE id=$id");
   }
 
 }

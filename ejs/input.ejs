@@ -3,7 +3,7 @@ did = phoxy.GenerateUniqueID();
 
 if (prio == null)
 {
-  id = '';
+  ID = '';
   phoxy.Appeared('#' + did, function()
   {
     $(this).prop('disabled', 'true');
@@ -21,7 +21,7 @@ phoxy.Appeared('#' + did, function()
       var db_id = $(this).attr('data-db-id');
       console.log('a');
       phoxy.AJAX(
-        'main/Update?id=' +
+        'alarm_prio/Update?id=' +
         db_id +
         '&val=' +
         that.val(), function()
@@ -34,7 +34,7 @@ phoxy.Appeared('#' + did, function()
 
 <input
   id='<%= did %>'
-  data-db-id='<%= id %>'
+  data-db-id='<%= ID %>'
   type='text'
   value='<%= prio %>'
   class="form-control"
