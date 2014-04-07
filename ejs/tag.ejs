@@ -1,9 +1,14 @@
 <div class='row'>
-  <div class='col-md-2'>
+  <div class='col-md-3'>
+    <%= description %>
+  </div>
+  <div class='col-md-1'>
     <div data-type='tag_name' title='<%= description %>'>
       <%= name %>
     </div>
   </div>
+  <div class='col-md-8'>
+    <div class='row'>
 <% for (var k in types)
 {
   var ty = types[k];
@@ -15,12 +20,19 @@
 %>
   <div class='col-md-1'>
 <%
-  if (v.priority != null)
+  if (v.priority == null)
+  {
+%>
+  <input disabled class='disabled' size='2' />
+<%  
+  }
+  else
   {
     var did = phoxy.GenerateUniqueID();
     var input = 
       $('<input />')
-        .addClass('form-control')
+        .attr('size', 2)
+        //.addClass('form-control')
         .attr('id', did)
         .attr('data-db-id', v.id)
         .attr('value', v.priority);
@@ -66,5 +78,7 @@
   </div>
 <%  
 }
-%>  
+%>
+  </div>
+  </div>
 </div>
