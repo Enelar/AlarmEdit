@@ -14,40 +14,28 @@ class alarm_prio extends api
       ]
     ];
   }
-  
+
   protected function Tags()
   {
-    $res = mssql_query("SELECT id, CAST(name as text) as name, CAST(description as text) as description FROM [dbo].[TAG] ORDER BY TAG.name ASC");
-    $ret = [];
-    
-    do {
-      while ($row = mssql_fetch_assoc($res)) {
-        array_push($ret, $row);
-      }
-    } while (mssql_next_result($res));
-
+    $ret = db::Query("SELECT id, CAST(name as text) as name, CAST(description as text) as description FROM [dbo].[TAG] ORDER BY TAG.name ASC");
     return ["data" => $ret];
+  }
+  
+  protected function TagValues( $id )
+  {
+    $res = mssql_query("SELECT type, priority FROM [dbo].[ALARM] WHERE id_tag=$id");
   }
   
   protected function Types()
   {
-    $res = mssql_query("SELECT type FROM [dbo].[ALARM] GROUP BY type");
-    $ret = [];
-    do {
-      while ($row = mssql_fetch_row($res)) {
-        array_push($ret, ["name" => $row[0]]);
-      }
-    } while (mssql_next_result($res));
-
+    $ret = db::Query("SELECT type FROM [dbo].[ALARM] GROUP BY type");
     return ["data" => $ret];
   }
   
   protected function Value( $tag, $type )
   { // yep i know what is sqlinj
-    $res = mssql_query("SELECT * FROM [dbo].[ALARM] WHERE id_tag=(SELECT id FROM [dbo].[TAG] WHERE name='$tag') AND type='$type'");
-    if (mssql_num_rows($res))
-      $ret = mssql_fetch_assoc($res);
-    else
+    $ret = db::Query("SELECT * FROM [dbo].[ALARM] WHERE id_tag=(SELECT id FROM [dbo].[TAG] WHERE name='$tag') AND type='$type'");
+    if ($ret == null)
       $ret = ["id" => null, "PRIORITY" => null];
     $ret['prio'] = $ret["PRIORITY"];
     return [
@@ -58,10 +46,8 @@ class alarm_prio extends api
   
   protected function Update( $id, $val )
   { // yep i know what is sqlinj
-    $res = mssql_query("UPDATE [dbo].[ALARM] SET priority=$val WHERE id=$id");
-    mssql_free_result($res);
-    $res = mssql_query("SELECT priority as p FROM [dbo].[ALARM] WHERE id=$id");
-    $row = mssql_fetch_assoc($res);
+    db::Query("UPDATE [dbo].[ALARM] SET priority=$val WHERE id=$id");
+    $row = db::Query("SELECT priority as p FROM [dbo].[ALARM] WHERE id=$id", true);
     return ["data" => ["res" => $row["p"] == $val]];
   }
 

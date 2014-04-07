@@ -19,4 +19,5 @@ $link = mssql_connect(
 
 //$server = 'ENELAR-TSOFT\SQLEXPRESS';
 //$link = mssql_connect($server, 
+include_once('mssql.php');
 include('phoxy/index.php');
