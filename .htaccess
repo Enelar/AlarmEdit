@@ -6,6 +6,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteRule ^api/(.*)$ rpc.php?api=$1 [L,QSA]
+RewriteRule ^api/$ rpc.php?api=main/home [L,QSA]
 RewriteRule ^libs/(.*)$ phoxy/libs/$1 [L,QSA]
 RewriteRule ^phoxy_loader.js$ phoxy/phoxy_loader.js [L,QSA]
 RewriteRule ^phoxy.js$ phoxy/phoxy.js [L,QSA]

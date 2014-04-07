@@ -5,9 +5,9 @@
 
 function phoxy_conf()
 {
-	$ret = phoxy_default_conf();
-	unset($ret["cache_global"]);
-	return $ret;
+  $ret = phoxy_default_conf();
+  $ret["cache_global"] = "1s";
+  return $ret;
 }
 
 $link = mssql_connect('192.168.0.106:1433', 'tsoft', 'qwerty');
