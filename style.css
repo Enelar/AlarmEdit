@@ -1,4 +1,15 @@
+.prio_table .row:hover {
+  background: #eeeeee;
+}
 
-.row:hover {
-    background: #eeeeee;
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu .sub-menu{
+  left: 100%;
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+  margin-top: -1px;
 }
