@@ -24,9 +24,21 @@ phoxy.Appeared('#' + did, function()
         'alarm_prio/Update?id=' +
         db_id +
         '&val=' +
-        that.val(), function()
+        that.val(), function(data)
         {
           that.prop('disabled', false);
+          if (data.data.res)
+          {
+            that.tooltip({'title' : 'Сохранено'}).tooltip('show');
+            phoxy.Defer(function() { that.tooltip('destroy'); }, 500);
+          }
+          else
+          {
+            that.tooltip({'title' : 'НЕ Сохранено'}).tooltip('show');
+            that.css({'background-color' : 'red'});
+            phoxy.Defer(function() { that.tooltip('destroy'); }, 1000);
+            phoxy.Defer(function() { that.css({'background-color' : 'white'}); }, 2000);
+          }
         });
     });
 });

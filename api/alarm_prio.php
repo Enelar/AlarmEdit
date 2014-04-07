@@ -59,6 +59,10 @@ class alarm_prio extends api
   protected function Update( $id, $val )
   { // yep i know what is sqlinj
     $res = mssql_query("UPDATE [dbo].[ALARM] SET priority=$val WHERE id=$id");
+    mssql_free_result($res);
+    $res = mssql_query("SELECT priority as p FROM [dbo].[ALARM] WHERE id=$id");
+    $row = mssql_fetch_assoc($res);
+    return ["data" => ["res" => $row["p"] == $val]];
   }
 
 }
