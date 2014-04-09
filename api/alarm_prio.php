@@ -5,7 +5,7 @@ class alarm_prio extends api
   protected function Reserve( $level = 1 )
   {
     return [
-      "design" => "table",
+      "design" => "alarm_prio/entry",
       "result" => "content",
       "data" => 
       [
