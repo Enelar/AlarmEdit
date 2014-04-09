@@ -13,7 +13,7 @@ function phoxy_conf()
 $link = mssql_connect(
 'TSOFT_TEST'
 //'192.168.0.106:1433'
-, 'tsoft', 'qwerty');
+, 'sa', 'password');
 //var_dump($link);	
 //var_dump(mssql_get_last_message());	
 

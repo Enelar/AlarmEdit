@@ -4,6 +4,7 @@ class db
 {
   public static function Query( $stmt, $single_row = false )
   {
+//var_dump($stmt);
     $res = mssql_query($stmt);
 
     if ($res === true)

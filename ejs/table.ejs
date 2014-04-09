@@ -1,7 +1,9 @@
 <div class='prio_table'>
+<div id='stick_head' style='background-color: gray;'>
 <div class='row'>
-  <div class='col-md-4'></div>
-  <div class='col-md-8'>
+  <div class='col-md-3'>Описание</div>
+  <div class='col-md-2'>Позиция</div>
+  <div class='col-md-7'>
     <div class='row'>
 <% for (var k in types)
 {
@@ -16,6 +18,24 @@
     </div>
   </div>
 </div>
+</div>
+
+<%
+phoxy.Defer(function()
+{
+  var stick = $('#stick_head');
+  var pos = stick.position();
+  stick.css({width: stick.parent().width()});
+  $(window).scroll(function()
+  {
+	var wp = $(window).scrollTop();
+	if (wp >= pos.top)
+	  stick.addClass("stick");
+	else
+      stick.removeClass("stick");
+  });
+});
+%>
   
 
 <% for (var k in tags)

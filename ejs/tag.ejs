@@ -2,12 +2,12 @@
   <div class='col-md-3'>
     <%= description %>
   </div>
-  <div class='col-md-1'>
+  <div class='col-md-2'>
     <div data-type='tag_name' title='<%= description %>'>
       <%= name %>
     </div>
   </div>
-  <div class='col-md-8'>
+  <div class='col-md-7'>
     <div class='row'>
 <% for (var k in types)
 {
@@ -40,6 +40,10 @@
         phoxy.Appeared('#' + did, function()
         {
           $(this)
+		  	.click(function()
+			{
+			$(this).select();
+			})
             .change(function()
             {
               var that = $(this);

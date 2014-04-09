@@ -13,3 +13,9 @@
   visibility: hidden;
   margin-top: -1px;
 }
+
+.stick {
+  position: fixed;
+  top: 0px;
+  z-index: 100;
+}

@@ -49,7 +49,7 @@ class alarm_prio extends api
   protected function Types()
   {
     $ret = [];
-    foreach (["HH", "HI", "LO", "LL", "NR", "IOP", "IOP-", "ANS+", "ANS-", "ALM"] as $t)
+    foreach (["HI", "LO", "NR", "IOP", "IOP-", "ANS+", "ANS-", "ALM"] as $t)
       array_push($ret, ['name' => $t]);
     return ["data" => $ret];
   }
