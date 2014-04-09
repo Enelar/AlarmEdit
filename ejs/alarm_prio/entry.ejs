@@ -6,8 +6,6 @@
   var v = tags[k];
   v.types = types;
   
-  //if (v.name == 'A_AVU-3')
-  //break;
   var cb = undefined;
   if (k == tags.length - 1)
     cb = function()
@@ -23,7 +21,7 @@
         });
     };
 %>
-  <%= phoxy.DeferRender('tag_trap', {v: v}, cb) %>
+  <%= phoxy.DeferRender('alarm_prio/tag_trap', {v: v}, cb) %>
 <%  
 }
 %>
