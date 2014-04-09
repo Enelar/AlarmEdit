@@ -1,0 +1,38 @@
+<div style='width: 400px;'>
+  <div class='row'>
+    <div class='col-md-7'>
+      <input class='form-control'>
+    </div>
+    <div class='col-md-5'>  
+      <button class="btn btn-primary">Добавить</button>
+    </div>
+  </div>
+<br>
+  <div id='sticky' style='background-color: gray'>
+    <div class='row' >
+      <div class='col-md-8'>
+        Название
+      </div>
+      <div class='col-md-4'>  
+        Приоритет
+      </div>
+    </div>
+  </div>
+
+<%
+for (var k in blocks)
+{
+  var v = blocks[k];
+%>
+  <div class='row' >
+    <div class='col-md-8'>
+      <%= v.name %>
+    </div>
+    <div class='col-md-4'>  
+      <input class='form-control' value='<%= v.prio %>' disabled>
+    </div>  
+  <div>
+<%
+}
+%>
+</div>
