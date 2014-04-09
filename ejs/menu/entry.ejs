@@ -10,16 +10,10 @@
       <li class="dropdown">
         <a href='#alarm_prio' data-toggle="dropdown" class="dropdown-toggle">Приоритеты <span class='caret'></span></a>
         <ul class="dropdown-menu">
-<%
-for (var level = 1; level <= 4; level++)
-{
-%>
-          <li>
-            <a href='#alarm_prio?level=<%= level %>'>Уровень <%= level %></a>
-          </li>
-<%
-}
-%>
+          <li><a href='#alarm_prio/1'>Приоритет HIGH</a></li>
+          <li><a href='#alarm_prio/2'>Приоритет MEDIUM</a></li>
+          <li><a href='#alarm_prio/3'>Приоритет LOW</a></li>
+          <li><a href='#alarm_prio/4'>Приоритет LOGGING</a></li>                    
         </ul>
       </li>
     </ul>
