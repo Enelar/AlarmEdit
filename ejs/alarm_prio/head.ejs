@@ -1,0 +1,37 @@
+<div id='stick_head' style='background-color: gray;'>
+  <div class='row'>
+    <div class='col-md-3'>Описание</div>
+    <div class='col-md-2'>Позиция</div>
+    <div class='col-md-7'>
+      <div class='row'>
+<% for (var k in types)
+{
+  var v = types[k];
+%>
+      <div class='col-md-1' style='min-width: 50px;'>
+        <%= v.name %>
+      </div>
+<%  
+}
+%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%
+phoxy.Defer(function()
+{
+  var stick = $('#stick_head');
+  var pos = stick.position();
+  stick.css({width: stick.parent().width()});
+  $(window).scroll(function()
+  {
+	var wp = $(window).scrollTop();
+	if (wp >= pos.top)
+	  stick.addClass("stick");
+	else
+      stick.removeClass("stick");
+  });
+});
+%>

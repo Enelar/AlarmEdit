@@ -1,0 +1,39 @@
+<div class='prio_table'>
+  <%= phoxy.DeferRender('alarm_prio/head', this) %>
+
+<% for (var k in tags)
+{
+  var v = tags[k];
+  v.types = types;
+  
+  var cb = undefined;
+  if (k == tags.length - 1)
+    cb = function()
+    {
+      $('#content .row')
+        .each(function(index)
+        {
+          var that = this;
+          phoxy.Defer(function()
+          {
+            $(that).trigger('mouseenter')
+          }, 7 * index);
+        });
+    };
+%>
+  <%= phoxy.DeferRender('alarm_prio/tag_trap', {v: v}, cb) %>
+<%  
+}
+%>
+
+<%
+phoxy.Defer(function()
+{
+  $('table tr td div[data-type="tag_name"]').each(function()
+  {
+    $(this).tooltip();
+  });
+  
+});
+%>
+</div>

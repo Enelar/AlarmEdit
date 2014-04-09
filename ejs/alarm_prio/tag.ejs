@@ -9,21 +9,22 @@
   </div>
   <div class='col-md-7'>
     <div class='row'>
-<% for (var k in types)
+<%
+for (var k in types)
 {
   var ty = types[k];
-  //console.log(ty, values);
+
   if (typeof(values[ty.name]) != 'undefined')
     v = values[ty.name];
   else
     v = {priority: null, id: ''};
 %>
-  <div class='col-md-1'>
+      <div class='col-md-1'>
 <%
   if (v.priority == null)
   {
 %>
-  <input disabled class='disabled' size='2' />
+        <input disabled class='disabled' size='2' />
 <%  
   }
   else
@@ -40,10 +41,10 @@
         phoxy.Appeared('#' + did, function()
         {
           $(this)
-		  	.click(function()
-			{
-			$(this).select();
-			})
+            .click(function()
+            {
+              $(this).select();
+            })
             .change(function()
             {
               var that = $(this);
@@ -60,12 +61,12 @@
                   that.prop('disabled', false);
                   if (data.data.res)
                   {
-                    that.tooltip({'title' : 'Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¾'}).tooltip('show');
-                    phoxy.Defer(function() { that.tooltip('destroy'); }, 500);
+                    that.css({'background-color' : 'green'});
+                    phoxy.Defer(function() { that.css({'background-color' : 'white'}); }, 50);
                   }
                   else
                   {
-                    that.tooltip({'title' : 'ÐÐ• Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¾'}).tooltip('show');
+                    that.tooltip({'title' : 'ÍÅ Ñîõðàíåíî'}).tooltip('show');
                     that.css({'background-color' : 'red'});
                     phoxy.Defer(function() { that.tooltip('destroy'); }, 1000);
                     phoxy.Defer(function() { that.css({'background-color' : 'white'}); }, 2000);
@@ -75,14 +76,14 @@
         });
 
 %>
-    <%= input.wrap('<div></div>').parent().html() %>
+        <%= input.wrap('<div></div>').parent().html() %>
 <%
   }
 %>
-  </div>
+      </div>
 <%  
 }
 %>
-  </div>
+    </div>
   </div>
 </div>

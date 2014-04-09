@@ -5,6 +5,8 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
+RewriteRule ^api/alarm_prio/(\d?)$ http://%{HTTP_HOST}/api/alarm_prio?i=$1 [R,L,QSA]
+
 RewriteRule ^api/(.*)$ rpc.php?api=$1 [L,QSA]
 RewriteRule ^api/$ rpc.php?api=main/home [L,QSA]
 RewriteRule ^libs/(.*)$ phoxy/libs/$1 [L,QSA]

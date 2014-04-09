@@ -12,7 +12,7 @@ phoxy.Appeared('#' + did, function()
   $(this).hover(function()
   {
     var that = this;
-    phoxy.Fancy('tag', window[$(this).attr('id')], function(html)
+    phoxy.Fancy('alarm_prio/tag', window[$(this).attr('id')], function(html)
     {
       $(that).replaceWith(html);
     });
