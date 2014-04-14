@@ -20,6 +20,25 @@
   </div>
 
 <%
+phoxy.Defer(function()
+{
+  $('button')
+    .click(function()
+    {
+      $(this).prop('disabled', true);
+      var input = $(this).parents('.row').find('input');
+      var name = input.val();
+      phoxy.AJAX('block/Add?name=' + encodeURIComponent(name), function()
+      {
+        input.val('');
+        $(this).prop('disabled', false);
+        phoxy.ApiAnswer({reset: true});
+      });
+    });
+});
+%>
+
+<%
 for (var k in blocks)
 {
   var v = blocks[k];
