@@ -25,9 +25,12 @@ class alarm_prio extends api
     $ret = [];
     foreach ($res as $row)
     {
-      $row['values'] = $this->TagValues($row['id'], $level);
-      if (!count($row['values']))
-        continue;
+      if ($level != -1)
+      {
+        $row['values'] = $this->TagValues($row['id'], $level);
+        if (!count($row['values']))
+          continue;
+      }
       array_push($ret, $row);
     }
     return ["data" => $ret];

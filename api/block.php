@@ -13,7 +13,7 @@ class block extends api
   
   protected function Get()
   {
-    $res = db::Query("SELECT name, BLOCK_PRIORITY as prio FROM dbo.BLOCK");
+    $res = db::Query("SELECT id, name, BLOCK_PRIORITY as prio FROM dbo.BLOCK");
     return ["data" => ["blocks" => $res]];
   }
   
